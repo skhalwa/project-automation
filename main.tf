@@ -163,7 +163,7 @@ resource "azurerm_snapshot_source" "example" {
   name                = "example-snapshot-source"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
-  managed_disk_id     = azurerm_virtual_machine.main.storage_os_disk.0.managed_disk_id
+  managed_disk_id     = azurerm_virtual_machine.main.storage_os_disk[0].managed_disk_id
 }
 
 resource "azurerm_snapshot" "example" {
