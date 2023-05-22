@@ -163,8 +163,10 @@ resource "azurerm_snapshot" "example" {
   name                = "example-snapshot"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+
   creation_data {
     source_resource_id = azurerm_virtual_machine.main.id
     create_option      = "Copy"
   }
 }
+
