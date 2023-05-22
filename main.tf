@@ -160,9 +160,11 @@ resource "azurerm_virtual_machine" "main" {
 #   }
 # }
 resource "azurerm_snapshot" "example" {
-  name                = "snapshot"
+  name                = "example-snapshot"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
-  create_option       = "Copy"
-  source_uri          = "azurerm_virtual_machine.main.storage_os_disk[0].image_uri"
+  creation_data {
+    source_resource_id = azurerm_virtual_machine.main.id
+    create_option      = "Copy"
+  }
 }
