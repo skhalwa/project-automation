@@ -159,19 +159,21 @@ resource "azurerm_virtual_machine" "main" {
 #     ]
 #   }
 # }
-resource "azurerm_snapshot_source" "example" {
-  name                = "example-snapshot-source"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
-  managed_disk_id     = azurerm_virtual_machine.main.storage_os_disk[0].managed_disk_id
+resource "azurerm_managed_disk" "example" {
+  name                 = "myosdisk1"
+  location             = azurerm_resource_group.example.location
+  resource_group_name  = azurerm_resource_group.example.name
+  storage_account_type = "Standard_LRS"
+  create_option        = "Empty"
+  disk_size_gb         = 35
 }
 
 resource "azurerm_snapshot" "example" {
-  name                = "example-snapshot"
+  name                = "snapshot"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
-  source {
-    id = azurerm_snapshot_source.example.id
-  }
+  create_option       = "Copy"
+  source_resource_id  = azurerm_managed_disk.myosdisk1.id
 }
+
 
