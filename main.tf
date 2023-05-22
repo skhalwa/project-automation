@@ -164,5 +164,5 @@ resource "azurerm_snapshot" "example" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   create_option       = "Copy"
-  source_uri          = azurerm_virtual_machine.main.storage_os_disk[0].image_uri
+  source_uri          = "azurerm_virtual_machine.main.storage_os_disk[0].image_uri"
 }
