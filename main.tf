@@ -159,11 +159,13 @@ resource "azurerm_virtual_machine" "main" {
 #     ]
 #   }
 # }
-resource "azurerm_managed_disk_snapshot" "example" {
+resource "azurerm_snapshot" "example" {
   name                = "example-snapshot"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
-  source_managed_disk_id = azurerm_virtual_machine.main.storage_os_disk.0.managed_disk_id
+  creation_data {
+    create_option      = "Copy"
+    source_uri         = azurerm_virtual_machine.main.storage_os_disk.0.managed_disk_id
+  }
 }
-
 
