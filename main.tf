@@ -9,7 +9,7 @@ terraform {
       resource_group_name  = "terra-rg"
       storage_account_name = "tfstatebackup999"
       container_name       = "mytfstatefile"
-      key                  = "terraform.tfstate"
+      key                  = "automation.tfstate"
   }
 }
 
